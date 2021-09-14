@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <title>Task-2</title>
+</head>
+<body>
+  <section id="first-section" class="image-container"  data-aos="zoom-in"></section>
+  <section id="second-section" class="image-container" data-aos="fade-down"> </section>
+  <section id="third-section" class="image-container" data-aos="zoom-in"></section>
+  <section id="fourth-section" class="image-container" data-aos="fade-down"></section>
+
+
+	<!-- registration form -->
+	<div class="div-container">
+    <h1>RSVP form</h1>
+    <form action="#">
+      <div>
+        <label for="name" class=form-label>NAME</label>
+        <div>
+          <input type="text" id="enter-name" class="form-input" placeholder="enter your name" required>
+        </div>
+      </div>
+      <div>
+        <label for="email" class=form-label>EMAIL</label>
+        <div>
+          <input type="text" id="enter-email" class="form-input" placeholder="enter your email" required>
+        </div>
+      </div>
+      <div>
+        <label for="phone" class=form-label>PHONE NUMBER</label>
+        <div>
+          <input type="number" id="enter-phone" class="form-input" placeholder="enter your phone number" required>
+        </div>
+      </div>
+      <div>
+        <label for="feedback" class=form-label>ENTER YOUR VALUABLE FEEDBACK</label>
+        <div>
+          <textarea name="feedback-section" id="enter-feedback" required></textarea>
+        </div>
+      </div>
+      <input type="submit" value="SUBMIT" id="submit-button">
+    </form>
+  </div>
+
+
+<!--map-->
+<div class="map-container">
+    <h1>DIRECTIONS</h1>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3743.953084262401!2d85.733604114143!3d20.219270520295584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a19a8fa59ac3c81%3A0xc81fc475faa77274!2sC.%20V.%20Raman%20Global%20University!5e0!3m2!1sen!2sin!4v1629777588941!5m2!1sen!2sin" width="500" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+<!--countdown timer-->
+<div id="body">
+<h1>Countdown Timer</h1>
+<div id="clockdiv">
+  <div>
+    <span class="days"></span>
+    <div class="smalltext">Days</div>
+  </div>
+  <div>
+    <span class="hours"></span>
+    <div class="smalltext">Hours</div>
+  </div>
+  <div>
+    <span class="minutes"></span>
+    <div class="smalltext">Minutes</div>
+  </div>
+  <div>
+    <span class="seconds"></span>
+    <div class="smalltext">Seconds</div>
+  </div>
+</div>
+</div>
+
+
+
+	<!-- registration form ends here -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    function getTimeRemaining(endtime) {
+  const total = Date.parse(endtime) - Date.parse(new Date());
+  const seconds = Math.floor((total / 1000) % 60);
+  const minutes = Math.floor((total / 1000 / 60) % 60);
+  const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(total / (1000 * 60 * 60 * 24));
+  
+  return {
+    total,
+    days,
+    hours,
+    minutes,
+    seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  const clock = document.getElementById(id);
+  const daysSpan = clock.querySelector('.days');
+  const hoursSpan = clock.querySelector('.hours');
+  const minutesSpan = clock.querySelector('.minutes');
+  const secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    const t = getTimeRemaining(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  const timeinterval = setInterval(updateClock, 1000);
+}
+
+const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+initializeClock('clockdiv', deadline);
+    AOS.init({
+      offset:400,
+      duration:3000
+    });
+  </script>
+
+
+</body>
+</html>
